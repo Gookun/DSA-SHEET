@@ -1,15 +1,15 @@
  /*Efficiently merging two sorted arrays with O(1) extra space
    using gap method*/      
 
-       long long nextGap(long long gap)
+        long long nextGap(long long gap)
         {
             if (gap <= 1)
                 return 0;
-            return ceil(gap/2);
+            return (gap/2)+(gap%2);
         }
         void merge(long long arr1[], long long arr2[], int n, int m) 
         { 
-            int i,j,gap=m+n;
+            long long i,j,gap=m+n;
             for(gap = nextGap(gap); gap>0 ;gap = nextGap(gap))
             {
                 //comparing elements in the first array.
