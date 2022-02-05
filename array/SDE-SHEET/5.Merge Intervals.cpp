@@ -5,26 +5,27 @@ return an array of the non-overlapping intervals that
 cover all the intervals in the input.*/
     vector<vector<int>> merge(vector<vector<int>>& intervals) {
         
-        vector<vector<int>> mergedIntervals;
+        vector<vector<int>> output;
         
         if(intervals.size() == 0)
-            return mergedIntervals; 
+            return output; 
         
         sort(intervals.begin(),intervals.end());
-        vector<int> tempInterval = intervals[0];
+        vector<int> lastEnd = intervals[0];
         
         for(auto it:intervals)
         {
-            if(it[0] <= tempInterval[1])
-                tempInterval[1] = max(it[1],tempInterval[1]);
+            if(it[0] <= lastEnd[1])
+              //start <= lastend
+                lastEnd[1] = max(lastEnd[1],it[1]);
             else
             {
-                mergedIntervals.push_back(tempInterval);
-                tempInterval = it;
+                output.push_back(lastEnd);
+                lastEnd = it;
             }
         }
         
-        mergedIntervals.push_back(tempInterval);
-        return mergedIntervals;
+        output.push_back(lastend);
+        return output;
     }
   // TC = (NlogN)+(N)
